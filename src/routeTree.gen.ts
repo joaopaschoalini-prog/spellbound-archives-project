@@ -19,6 +19,7 @@ import { Route as CriaturasRouteImport } from './routes/criaturas'
 import { Route as FeiticosRouteImport } from './routes/feiticos'
 import { Route as MapaRouteImport } from './routes/mapa'
 import { Route as PersonagensRouteImport } from './routes/personagens'
+import { Route as BibliotecaSlugRouteImport } from './routes/biblioteca.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,43 +71,51 @@ const PersonagensRoute = PersonagensRouteImport.update({
   path: '/personagens',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BibliotecaSlugRoute = BibliotecaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BibliotecaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/arquivos-secretos': typeof ArquivosSecretosRoute
   '/artefatos': typeof ArtefatosRoute
-  '/biblioteca': typeof BibliotecaRoute
+  '/biblioteca': typeof BibliotecaRouteWithChildren
   '/calendario': typeof CalendarioRoute
   '/casas': typeof CasasRoute
   '/criaturas': typeof CriaturasRoute
   '/feiticos': typeof FeiticosRoute
   '/mapa': typeof MapaRoute
   '/personagens': typeof PersonagensRoute
+  '/biblioteca/$slug': typeof BibliotecaSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/arquivos-secretos': typeof ArquivosSecretosRoute
   '/artefatos': typeof ArtefatosRoute
-  '/biblioteca': typeof BibliotecaRoute
+  '/biblioteca': typeof BibliotecaRouteWithChildren
   '/calendario': typeof CalendarioRoute
   '/casas': typeof CasasRoute
   '/criaturas': typeof CriaturasRoute
   '/feiticos': typeof FeiticosRoute
   '/mapa': typeof MapaRoute
   '/personagens': typeof PersonagensRoute
+  '/biblioteca/$slug': typeof BibliotecaSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/arquivos-secretos': typeof ArquivosSecretosRoute
   '/artefatos': typeof ArtefatosRoute
-  '/biblioteca': typeof BibliotecaRoute
+  '/biblioteca': typeof BibliotecaRouteWithChildren
   '/calendario': typeof CalendarioRoute
   '/casas': typeof CasasRoute
   '/criaturas': typeof CriaturasRoute
   '/feiticos': typeof FeiticosRoute
   '/mapa': typeof MapaRoute
   '/personagens': typeof PersonagensRoute
+  '/biblioteca/$slug': typeof BibliotecaSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/feiticos'
     | '/mapa'
     | '/personagens'
+    | '/biblioteca/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/feiticos'
     | '/mapa'
     | '/personagens'
+    | '/biblioteca/$slug'
   id:
     | '__root__'
     | '/'
@@ -145,13 +156,14 @@ export interface FileRouteTypes {
     | '/feiticos'
     | '/mapa'
     | '/personagens'
+    | '/biblioteca/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ArquivosSecretosRoute: typeof ArquivosSecretosRoute
   ArtefatosRoute: typeof ArtefatosRoute
-  BibliotecaRoute: typeof BibliotecaRoute
+  BibliotecaRoute: typeof BibliotecaRouteWithChildren
   CalendarioRoute: typeof CalendarioRoute
   CasasRoute: typeof CasasRoute
   CriaturasRoute: typeof CriaturasRoute
@@ -232,14 +244,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PersonagensRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biblioteca/$slug': {
+      id: '/biblioteca/$slug'
+      path: '/$slug'
+      fullPath: '/biblioteca/$slug'
+      preLoaderRoute: typeof BibliotecaSlugRouteImport
+      parentRoute: typeof BibliotecaRoute
+    }
   }
 }
+
+interface BibliotecaRouteChildren {
+  BibliotecaSlugRoute: typeof BibliotecaSlugRoute
+}
+
+const BibliotecaRouteChildren: BibliotecaRouteChildren = {
+  BibliotecaSlugRoute: BibliotecaSlugRoute,
+}
+
+const BibliotecaRouteWithChildren = BibliotecaRoute._addFileChildren(
+  BibliotecaRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ArquivosSecretosRoute: ArquivosSecretosRoute,
   ArtefatosRoute: ArtefatosRoute,
-  BibliotecaRoute: BibliotecaRoute,
+  BibliotecaRoute: BibliotecaRouteWithChildren,
   CalendarioRoute: CalendarioRoute,
   CasasRoute: CasasRoute,
   CriaturasRoute: CriaturasRoute,
