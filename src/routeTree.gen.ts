@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArquivosSecretosRouteImport } from './routes/arquivos-secretos'
+import { Route as ArtefatosRouteImport } from './routes/artefatos'
+import { Route as BibliotecaRouteImport } from './routes/biblioteca'
+import { Route as CalendarioRouteImport } from './routes/calendario'
+import { Route as CasasRouteImport } from './routes/casas'
+import { Route as CriaturasRouteImport } from './routes/criaturas'
+import { Route as FeiticosRouteImport } from './routes/feiticos'
+import { Route as MapaRouteImport } from './routes/mapa'
+import { Route as PersonagensRouteImport } from './routes/personagens'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArquivosSecretosRoute = ArquivosSecretosRouteImport.update({
+  id: '/arquivos-secretos',
+  path: '/arquivos-secretos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArtefatosRoute = ArtefatosRouteImport.update({
+  id: '/artefatos',
+  path: '/artefatos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BibliotecaRoute = BibliotecaRouteImport.update({
+  id: '/biblioteca',
+  path: '/biblioteca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalendarioRoute = CalendarioRouteImport.update({
+  id: '/calendario',
+  path: '/calendario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CasasRoute = CasasRouteImport.update({
+  id: '/casas',
+  path: '/casas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CriaturasRoute = CriaturasRouteImport.update({
+  id: '/criaturas',
+  path: '/criaturas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeiticosRoute = FeiticosRouteImport.update({
+  id: '/feiticos',
+  path: '/feiticos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapaRoute = MapaRouteImport.update({
+  id: '/mapa',
+  path: '/mapa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PersonagensRoute = PersonagensRouteImport.update({
+  id: '/personagens',
+  path: '/personagens',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/arquivos-secretos': typeof ArquivosSecretosRoute
+  '/artefatos': typeof ArtefatosRoute
+  '/biblioteca': typeof BibliotecaRoute
+  '/calendario': typeof CalendarioRoute
+  '/casas': typeof CasasRoute
+  '/criaturas': typeof CriaturasRoute
+  '/feiticos': typeof FeiticosRoute
+  '/mapa': typeof MapaRoute
+  '/personagens': typeof PersonagensRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/arquivos-secretos': typeof ArquivosSecretosRoute
+  '/artefatos': typeof ArtefatosRoute
+  '/biblioteca': typeof BibliotecaRoute
+  '/calendario': typeof CalendarioRoute
+  '/casas': typeof CasasRoute
+  '/criaturas': typeof CriaturasRoute
+  '/feiticos': typeof FeiticosRoute
+  '/mapa': typeof MapaRoute
+  '/personagens': typeof PersonagensRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/arquivos-secretos': typeof ArquivosSecretosRoute
+  '/artefatos': typeof ArtefatosRoute
+  '/biblioteca': typeof BibliotecaRoute
+  '/calendario': typeof CalendarioRoute
+  '/casas': typeof CasasRoute
+  '/criaturas': typeof CriaturasRoute
+  '/feiticos': typeof FeiticosRoute
+  '/mapa': typeof MapaRoute
+  '/personagens': typeof PersonagensRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/arquivos-secretos'
+    | '/artefatos'
+    | '/biblioteca'
+    | '/calendario'
+    | '/casas'
+    | '/criaturas'
+    | '/feiticos'
+    | '/mapa'
+    | '/personagens'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/arquivos-secretos'
+    | '/artefatos'
+    | '/biblioteca'
+    | '/calendario'
+    | '/casas'
+    | '/criaturas'
+    | '/feiticos'
+    | '/mapa'
+    | '/personagens'
+  id:
+    | '__root__'
+    | '/'
+    | '/arquivos-secretos'
+    | '/artefatos'
+    | '/biblioteca'
+    | '/calendario'
+    | '/casas'
+    | '/criaturas'
+    | '/feiticos'
+    | '/mapa'
+    | '/personagens'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArquivosSecretosRoute: typeof ArquivosSecretosRoute
+  ArtefatosRoute: typeof ArtefatosRoute
+  BibliotecaRoute: typeof BibliotecaRoute
+  CalendarioRoute: typeof CalendarioRoute
+  CasasRoute: typeof CasasRoute
+  CriaturasRoute: typeof CriaturasRoute
+  FeiticosRoute: typeof FeiticosRoute
+  MapaRoute: typeof MapaRoute
+  PersonagensRoute: typeof PersonagensRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/arquivos-secretos': {
+      id: '/arquivos-secretos'
+      path: '/arquivos-secretos'
+      fullPath: '/arquivos-secretos'
+      preLoaderRoute: typeof ArquivosSecretosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/artefatos': {
+      id: '/artefatos'
+      path: '/artefatos'
+      fullPath: '/artefatos'
+      preLoaderRoute: typeof ArtefatosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/biblioteca': {
+      id: '/biblioteca'
+      path: '/biblioteca'
+      fullPath: '/biblioteca'
+      preLoaderRoute: typeof BibliotecaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calendario': {
+      id: '/calendario'
+      path: '/calendario'
+      fullPath: '/calendario'
+      preLoaderRoute: typeof CalendarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/casas': {
+      id: '/casas'
+      path: '/casas'
+      fullPath: '/casas'
+      preLoaderRoute: typeof CasasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/criaturas': {
+      id: '/criaturas'
+      path: '/criaturas'
+      fullPath: '/criaturas'
+      preLoaderRoute: typeof CriaturasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feiticos': {
+      id: '/feiticos'
+      path: '/feiticos'
+      fullPath: '/feiticos'
+      preLoaderRoute: typeof FeiticosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mapa': {
+      id: '/mapa'
+      path: '/mapa'
+      fullPath: '/mapa'
+      preLoaderRoute: typeof MapaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/personagens': {
+      id: '/personagens'
+      path: '/personagens'
+      fullPath: '/personagens'
+      preLoaderRoute: typeof PersonagensRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArquivosSecretosRoute: ArquivosSecretosRoute,
+  ArtefatosRoute: ArtefatosRoute,
+  BibliotecaRoute: BibliotecaRoute,
+  CalendarioRoute: CalendarioRoute,
+  CasasRoute: CasasRoute,
+  CriaturasRoute: CriaturasRoute,
+  FeiticosRoute: FeiticosRoute,
+  MapaRoute: MapaRoute,
+  PersonagensRoute: PersonagensRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
