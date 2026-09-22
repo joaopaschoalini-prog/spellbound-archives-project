@@ -5,7 +5,7 @@ const sectors = [
   { index: "II", title: "Enciclopédia", description: "Personagens, criaturas e saber arcano em ordem sistemática.", to: "/personagens", action: "Consultar" },
   { index: "III", title: "Arquivos da Academia", description: "Documentos institucionais, casas e memórias históricas.", to: "/calendario", action: "Examinar" },
   { index: "IV · Restrito", title: "Arquivos Restritos", description: "Conhecimento selado pelo Conselho Arcano.", to: "/arquivos-secretos", action: "Invocar", restricted: true },
-] as const;
+] satisfies ReadonlyArray<{ index: string; title: string; description: string; to: "/biblioteca" | "/personagens" | "/calendario" | "/arquivos-secretos"; action: string; restricted?: boolean }>;
 
 const discoveries = [
   ["I", "Fragmentos do Códice de Vael foram decifrados", "Os símbolos revelam um rito de restauração esquecido há três eras.", "Pergaminho LXXXI · Salão das Estantes"],
