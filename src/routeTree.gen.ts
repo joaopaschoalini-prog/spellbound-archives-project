@@ -19,6 +19,7 @@ import { Route as CriaturasRouteImport } from './routes/criaturas'
 import { Route as FeiticosRouteImport } from './routes/feiticos'
 import { Route as MapaRouteImport } from './routes/mapa'
 import { Route as PersonagensRouteImport } from './routes/personagens'
+import { Route as BibliotecaIndexRouteImport } from './routes/biblioteca.index'
 import { Route as BibliotecaSlugRouteImport } from './routes/biblioteca.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -71,6 +72,11 @@ const PersonagensRoute = PersonagensRouteImport.update({
   path: '/personagens',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BibliotecaIndexRoute = BibliotecaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BibliotecaRoute,
+} as any)
 const BibliotecaSlugRoute = BibliotecaSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -89,12 +95,12 @@ export interface FileRoutesByFullPath {
   '/mapa': typeof MapaRoute
   '/personagens': typeof PersonagensRoute
   '/biblioteca/$slug': typeof BibliotecaSlugRoute
+  '/biblioteca/': typeof BibliotecaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/arquivos-secretos': typeof ArquivosSecretosRoute
   '/artefatos': typeof ArtefatosRoute
-  '/biblioteca': typeof BibliotecaRouteWithChildren
   '/calendario': typeof CalendarioRoute
   '/casas': typeof CasasRoute
   '/criaturas': typeof CriaturasRoute
@@ -102,6 +108,7 @@ export interface FileRoutesByTo {
   '/mapa': typeof MapaRoute
   '/personagens': typeof PersonagensRoute
   '/biblioteca/$slug': typeof BibliotecaSlugRoute
+  '/biblioteca': typeof BibliotecaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +123,7 @@ export interface FileRoutesById {
   '/mapa': typeof MapaRoute
   '/personagens': typeof PersonagensRoute
   '/biblioteca/$slug': typeof BibliotecaSlugRoute
+  '/biblioteca/': typeof BibliotecaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,12 +139,12 @@ export interface FileRouteTypes {
     | '/mapa'
     | '/personagens'
     | '/biblioteca/$slug'
+    | '/biblioteca/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/arquivos-secretos'
     | '/artefatos'
-    | '/biblioteca'
     | '/calendario'
     | '/casas'
     | '/criaturas'
@@ -144,6 +152,7 @@ export interface FileRouteTypes {
     | '/mapa'
     | '/personagens'
     | '/biblioteca/$slug'
+    | '/biblioteca'
   id:
     | '__root__'
     | '/'
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/mapa'
     | '/personagens'
     | '/biblioteca/$slug'
+    | '/biblioteca/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -244,6 +254,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PersonagensRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biblioteca/': {
+      id: '/biblioteca/'
+      path: '/'
+      fullPath: '/biblioteca/'
+      preLoaderRoute: typeof BibliotecaIndexRouteImport
+      parentRoute: typeof BibliotecaRoute
+    }
     '/biblioteca/$slug': {
       id: '/biblioteca/$slug'
       path: '/$slug'
@@ -256,10 +273,12 @@ declare module '@tanstack/react-router' {
 
 interface BibliotecaRouteChildren {
   BibliotecaSlugRoute: typeof BibliotecaSlugRoute
+  BibliotecaIndexRoute: typeof BibliotecaIndexRoute
 }
 
 const BibliotecaRouteChildren: BibliotecaRouteChildren = {
   BibliotecaSlugRoute: BibliotecaSlugRoute,
+  BibliotecaIndexRoute: BibliotecaIndexRoute,
 }
 
 const BibliotecaRouteWithChildren = BibliotecaRoute._addFileChildren(
